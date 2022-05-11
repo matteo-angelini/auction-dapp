@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.25 <0.9.0;
+pragma solidity >=0.8.0 <0.9.0;
 
 import "./ERC721Basic.sol";
 import "./ERC721Receiver.sol";
@@ -228,7 +228,7 @@ contract ERC721BasicToken is ERC721Basic {
      * @param _to The address that will own the minted token
      * @param _tokenId uint256 ID of the token to be minted by the msg.sender
      */
-    function _mint(address _to, uint256 _tokenId) internal {
+    function _mint(address _to, uint256 _tokenId) internal virtual {
         require(_to != address(0));
         addTokenTo(_to, _tokenId);
         emit Transfer(address(0), _to, _tokenId);
@@ -239,7 +239,7 @@ contract ERC721BasicToken is ERC721Basic {
      * @dev Reverts if the token does not exist
      * @param _tokenId uint256 ID of the token being burned by the msg.sender
      */
-    function _burn(address _owner, uint256 _tokenId) internal {
+    function _burn(address _owner, uint256 _tokenId) internal virtual {
         clearApproval(_owner, _tokenId);
         removeTokenFrom(_owner, _tokenId);
         emit Transfer(_owner, address(0), _tokenId);
@@ -264,7 +264,7 @@ contract ERC721BasicToken is ERC721Basic {
      * @param _to address representing the new owner of the given token ID
      * @param _tokenId uint256 ID of the token to be added to the tokens list of the given address
      */
-    function addTokenTo(address _to, uint256 _tokenId) internal {
+    function addTokenTo(address _to, uint256 _tokenId) internal virtual {
         require(tokenOwner[_tokenId] == address(0));
         tokenOwner[_tokenId] = _to;
         ownedTokensCount[_to] = ownedTokensCount[_to].add(1);
@@ -275,7 +275,7 @@ contract ERC721BasicToken is ERC721Basic {
      * @param _from address representing the previous owner of the given token ID
      * @param _tokenId uint256 ID of the token to be removed from the tokens list of the given address
      */
-    function removeTokenFrom(address _from, uint256 _tokenId) internal {
+    function removeTokenFrom(address _from, uint256 _tokenId) internal virtual {
         require(ownerOf(_tokenId) == _from);
         ownedTokensCount[_from] = ownedTokensCount[_from].sub(1);
         tokenOwner[_tokenId] = address(0);
