@@ -77,6 +77,31 @@ contract AuctionRepository {
         return auctions.length;
     }
 
+    function getActiveCount() public view returns (uint256) {
+      uint256 activeCount = 0;
+      
+      for (uint256 i = 0; i < auctions.length; i++) {
+        if(auctions[i].active) activeCount++;
+      }
+
+      return activeCount;
+    }
+
+    function fetchActiveAuctions() public view returns (Auction[] memory){
+      uint256 count = getActiveCount();
+      Auction[] memory activeAuctions = new Auction[](count);
+      uint256 currentIndex = 0;
+
+      for (uint256 i = 0; i < auctions.length; i++) {
+        if(auctions[i].active) {
+          activeAuctions[currentIndex] = auctions[i];
+          currentIndex++;
+        }
+      }
+
+      return activeAuctions;
+    }
+
     /**
      * @dev Gets the bid counts of a given auction
      * @param _auctionId uint ID of the auction
