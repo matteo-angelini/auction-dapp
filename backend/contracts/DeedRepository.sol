@@ -46,6 +46,17 @@ contract DeedRepository is ERC721Token {
     }
 
     /**
+     * @dev Public function to retrieve all deeds owned by account
+     */
+    function fetchOwnedTokens(address _owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        return ownedTokens[_owner];
+    }
+
+    /**
      * @dev Event is triggered if deed/token is registered
      * @param _by address of the registrar
      * @param _tokenId uint256 represents a specific deed
