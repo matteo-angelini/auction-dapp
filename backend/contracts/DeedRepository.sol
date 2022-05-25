@@ -45,15 +45,28 @@ contract DeedRepository is ERC721Token {
         return true;
     }
 
+    function countOwnedTokens() public view returns (uint256) {
+        return ownedTokens[msg.sender][1];
+    }
+
     /**
      * @dev Public function to retrieve all deeds owned by account
      */
-    function fetchOwnedTokens(address _owner)
+    function fetchOwnedTokens()
         public
         view
-        returns (uint256[] memory)
+        returns (uint256[] memory, string[] memory)
     {
-        return ownedTokens[_owner];
+        uint256 count = ownedTokens[msg.sender].length;
+        uint256[] memory deedIds = new uint256[](count);
+        string[] memory uris = new string[](count);
+
+        for (uint256 i = 0; i < ownedTokens[msg.sender].length; i++) {
+            deedIds[i] = ownedTokens[msg.sender][i];
+            uris[i] = tokenURI(ownedTokens[msg.sender][i]);
+        }
+
+        return (deedIds, uris);
     }
 
     /**

@@ -26,7 +26,7 @@ contract("DeedRepository", async (accounts) => {
     let ownerOfDeed = await instance.exists(123456789);
     assert.equal(ownerOfDeed.valueOf(), true, `Result should be true`);
   });
-
+  /* 
   it(`It should check owner of 123456789 who is ${accounts[0]}`, async () => {
     let ownerOfDeed = await instance.ownerOf(123456789);
     assert.equal(
@@ -77,5 +77,10 @@ contract("DeedRepository", async (accounts) => {
       auctionContractAddress,
       `${newOwnerAddress} should be ${auctionContractAddress}`
     );
+  }); */
+
+  it("Should return deeds", async () => {
+    let deeds = await instance.fetchOwnedTokens();
+    console.log(deeds);
   });
 });
