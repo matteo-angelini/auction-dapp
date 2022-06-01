@@ -1,2 +1,2 @@
-export const auctionaddress = "0xD81564f5bf20F26aEFA6593F98c8D7d0A5129c7b"
-export const deedaddress = "0x7A214d22F9584a997caCfb0C803bc90bBE87c5C5"
+export const auctionaddress = "0x0DEC43c80be1ba8AF4F62d3f3d04EaeD7792aD02"
+export const deedaddress = "0x4F98aD1C7B895CbdC98A9fFB8B5995E504429792"
